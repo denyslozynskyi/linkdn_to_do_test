@@ -1,0 +1,46 @@
+.task_create {
+  margin-bottom: 20px;
+  
+  &_form {
+    display: flex;
+    gap: 40px;
+  }
+
+  &_block {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  &_label {
+    font-size: 16px;
+  }
+
+  &_input {
+    padding: 3px 5px;
+    border-radius: 4px;
+    outline: none;
+    width: 250px;
+
+    &.invalid {
+      border-color: red
+    }
+    
+    &::placeholder {
+      color: black;
+    }
+  }
+
+  &_error {
+    font-size: 12px;
+    color: red;
+  }
+
+  &_button {
+    align-self: center;
+    padding: 5px 20px;
+    font-size: 18px;
+    border-radius: 4px;
+    border: 1px solid black;
+  }
+}
