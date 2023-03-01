@@ -1,4 +1,6 @@
-export const tasks = [
+import { Task } from "../types";
+
+export const tasks: Task[] = [
   {
     id: 1677617807685,
     title: "test",

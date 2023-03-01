@@ -1,19 +1,22 @@
 import "./taskList.scss";
-import icon from "../../icons/done_task_icon.png";
 
-const TaskList = (props) => {
+import { FC } from "react";
+
+import { Task } from "../../types";
+
+const TaskList: FC<{ tasks: Task[], onTaskDone: (id: number) => void, onModalOpen: (id: number) => void}> = (props) => {
   const taskList = props.tasks;
 
-  const trimText = (text) => {
+  const trimText = (text: string) => {
     return text.length > 20 ? text.slice(0, 20) + "..." : text;
   };
 
-  const onDoneClick = (taskId) => {
+  const onDoneClick = (taskId: number) => {
     props.onTaskDone(taskId);
   };
 
   const renderTasks = () => {
-    const tasks = taskList.map((task) => {
+    const tasks = taskList.map((task: Task) => {
       return (
         <div className="task_list_row" key={task.id}>
           <div
@@ -31,7 +34,7 @@ const TaskList = (props) => {
           <div className="task_list_row_item">{trimText(task.description)}</div>
           <div className="task_list_row_item">
             {task.done ? (
-              <img className="task_list_item_image" src={icon} alt=""></img>
+              <img className="task_list_item_image" src='/assets/done_task_icon.png' alt=""></img>
             ) : (
               <button
                 className="btn task_list_item_button"

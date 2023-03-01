@@ -9,10 +9,10 @@ import TaskList from "../taskList/TaskList";
 import TaskItem from "../taskItem/TaskItem";
 
 const App = () => {
-  const [modalOpen, setModalOpen] = useState({ open: false, taskId: 0 });
   const [tasks, setTasks] = useState(initialTasks);
+  const [modalOpen, setModalOpen] = useState({ open: false, task: tasks[0] });
 
-  const onCreateTask = (title, description) => {
+  const onCreateTask = (title: string, description: string) => {
     const newTask = {
       id: new Date().getTime(),
       title,
@@ -23,7 +23,7 @@ const App = () => {
     setTasks([...tasks, newTask]);
   };
 
-  const onTaskDone = (id) => {
+  const onTaskDone = (id: number) => {
     const newTasks = tasks.map((el) => {
       if (el.id === id) {
         el.done = true;
@@ -34,11 +34,14 @@ const App = () => {
     setTasks([...newTasks]);
   };
 
-  const onModalOpen = (id) => {
+  const onModalOpen = (id: number) => {
+    const task = tasks.find(el => {
+      return el.id === id;
+    })!;
     setModalOpen({
       ...modalOpen,
       open: true,
-      taskId: id,
+      task,
     });
   };
 
@@ -46,7 +49,7 @@ const App = () => {
     setModalOpen({
       ...modalOpen,
       open: false,
-      taskId: 0,
+      task: tasks[0]
     });
   };
 
@@ -62,7 +65,7 @@ const App = () => {
         />
       </div>
       {modalOpen.open ? (
-        <TaskItem taskId={modalOpen.taskId} onModalClose={onModalClose} />
+        <TaskItem task={modalOpen.task} onModalClose={onModalClose} />
       ) : null}
     </>
   );

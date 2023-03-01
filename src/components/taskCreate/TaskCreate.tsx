@@ -1,8 +1,10 @@
 import "./taskCreate.scss";
 
-import { useState } from "react";
+import { FC, FormEvent, useState } from "react";
 
-const TaskCreate = (props) => {
+import { Input, Error } from '../dumbComponents/index';
+
+const TaskCreate: FC<{onCreateTask: (title: string, description: string) => void}> = (props) => {
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [error, setError] = useState({
@@ -28,18 +30,20 @@ const TaskCreate = (props) => {
     }
 
     props.onCreateTask(taskTitle, taskDescription);
+    setTaskTitle('');
+    setTaskDescription('');
   };
 
-  const onTitleInput = (e) => {
-    setTaskTitle(e.target.value);
+  const onTitleInput = (e: FormEvent<HTMLInputElement>) => {
+    setTaskTitle(e.currentTarget.value);
     setError({
       ...error,
       titleError: false,
     });
   };
 
-  const onDescriptionInput = (e) => {
-    setTaskDescription(e.target.value);
+  const onDescriptionInput = (e: FormEvent<HTMLInputElement>) => {
+    setTaskDescription(e.currentTarget.value);
     setError({
       ...error,
       descriptionError: false,
@@ -85,19 +89,5 @@ const TaskCreate = (props) => {
     </div>
   );
 };
-
-const Error = () => (
-  <span className="task_create_error"> Please, complete this field</span>
-);
-
-const Input = (props) => (
-  <input
-    type="text"
-    className={`task_create_input ${props.error ? "invalid" : ""}`}
-    placeholder={`Please, input ${props.inputType}`}
-    value={props.content}
-    onChange={props.onChange}
-  />
-);
 
 export default TaskCreate;
