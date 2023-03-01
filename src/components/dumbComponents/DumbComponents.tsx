@@ -1,10 +1,10 @@
-import { FC } from "react";
+import { InputProps } from "../../types";
 
 export const Error = () => (
   <span className="task_create_error"> Please, complete this field</span>
 );
 
-export const Input: FC<{error: boolean, inputType: string, content: string, onChange: (e: any) => void}> = (props) => (
+export const Input = (props: InputProps) => (
   <input
     type="text"
     className={`task_create_input ${props.error ? "invalid" : ""}`}

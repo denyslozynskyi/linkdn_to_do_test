@@ -56,7 +56,7 @@ const App = () => {
   return (
     <>
       <div className="container">
-        <TaskCreate onCreateTask={onCreateTask} />
+        <TaskCreate onTaskCreate={onCreateTask} />
         <hr />
         <TaskList
           tasks={tasks}

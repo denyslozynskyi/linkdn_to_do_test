@@ -1,10 +1,11 @@
 import "./taskCreate.scss";
 
-import { FC, FormEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 
 import { Input, Error } from '../dumbComponents/index';
+import { TaskCreateProps } from "../../types";
 
-const TaskCreate: FC<{onCreateTask: (title: string, description: string) => void}> = (props) => {
+const TaskCreate = ({onTaskCreate}: TaskCreateProps) => {
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [error, setError] = useState({
@@ -29,7 +30,7 @@ const TaskCreate: FC<{onCreateTask: (title: string, description: string) => void
       return;
     }
 
-    props.onCreateTask(taskTitle, taskDescription);
+    onTaskCreate(taskTitle, taskDescription);
     setTaskTitle('');
     setTaskDescription('');
   };

@@ -1,40 +1,37 @@
 import "./taskList.scss";
 
-import { FC } from "react";
+import DoneIcon from "../../assets/done_task_icon.png";
 
-import { Task } from "../../types";
+import { ITask, TaskListProps } from "../../types";
+import { trimText } from "../../heplers";
 
-const TaskList: FC<{ tasks: Task[], onTaskDone: (id: number) => void, onModalOpen: (id: number) => void}> = (props) => {
-  const taskList = props.tasks;
-
-  const trimText = (text: string) => {
-    return text.length > 20 ? text.slice(0, 20) + "..." : text;
-  };
+const TaskList = ({tasks, onTaskDone, onModalOpen}: TaskListProps) => {
+  const taskList = tasks;
 
   const onDoneClick = (taskId: number) => {
-    props.onTaskDone(taskId);
+    onTaskDone(taskId);
   };
 
   const renderTasks = () => {
-    const tasks = taskList.map((task: Task) => {
+    const tasks = taskList.map((task: ITask) => {
       return (
         <div className="task_list_row" key={task.id}>
           <div
             className="task_list_row_item pointer"
-            onClick={() => props.onModalOpen(task.id)}
+            onClick={() => onModalOpen(task.id)}
           >
             {task.id}
           </div>
           <div
             className="task_list_row_item pointer"
-            onClick={() => props.onModalOpen(task.id)}
+            onClick={() => onModalOpen(task.id)}
           >
             {trimText(task.title)}
           </div>
           <div className="task_list_row_item">{trimText(task.description)}</div>
           <div className="task_list_row_item">
             {task.done ? (
-              <img className="task_list_item_image" src='/assets/done_task_icon.png' alt=""></img>
+              <img className="task_list_item_image" src={DoneIcon} alt=""></img>
             ) : (
               <button
                 className="btn task_list_item_button"
